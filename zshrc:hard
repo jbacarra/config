@@ -1,0 +1,72 @@
+# to confirm changes, dont forget 
+# source ~/.zshrc
+
+alias ls='ls -G'
+alias lsa='ls -G -a -lh'
+alias sd='pushd'
+alias pd='popd'
+alias grep='grep --color=auto'
+
+alias base='cd /users/jackb'
+alias misc='cd ~/miscellaneous'
+alias 485='cd ~/485eecs'
+alias 370='cd ~/370eecs'
+alias 479='cd ~/479eecs'
+alias 445='cd ~/445eecs'
+alias 482='cd ~/482eecs'
+alias 201='cd ~/201eecs'
+alias UMA='cd ~/UMA/UMARepo'
+alias codem='source codem'
+
+alias gyat=git
+alias gyatt=git
+alias gitt='git status'
+alias gs='git status'
+
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH=$PATH:$HOME/UMA/UMARepo/scripts/devel_scripts
+export PATH="$PATH:/users/jackb/scripts"
+
+source ~/.cargo/env
+
+# git tab complete
+autoload -Uz compinit && compinit
+
+# show current branch in git
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+zstyle ':vcs_info:git:*' formats '%B%F{green}⑂%f%%b%F{green}:%b%f '
+zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:git:*' check-for-changes true
+# zstyle ':vcs_info:git:*' formats '%B%F{green}⑂%f%%b%F{green}:%b(%c:%u)[%r]%f '
+
+PROMPT='%F{cyan}[%D{%L:%M:%S%p}] ${vcs_info_msg_0_}%F{blue}%~%f %B%F{blue}$%f%b '
+RPROMPT='%(?.%F{green}%b✓.%F{red}%b×) %F{cyan}[%W]%f'
+
+preexec () {
+    # start counting from when command is run
+    timer=${timer:-$(gdate +%s.%3N)}
+
+    # backup camera
+    if [[ $2 = "cd .." ]]; then
+        ls -G ..
+    fi
+}
+
+precmd () {
+    if [ $timer ]; then
+        time_taken=$(($(gdate +%s.%3N) - timer))
+        unset timer
+        if (( time_taken < 10 && time_taken > 0.1 )); then
+            # if command takes less than 10 seconds or longer than 0.1 seconds, show how long it took
+            rounded="($(printf %.3f $time_taken)) "
+            RPROMPT='%(?.%F{green}%b✓.%F{red}%b×) '"$rounded"'%F{cyan}[%W]%f'
+        else
+            RPROMPT='%(?.%F{green}%b✓.%F{red}%b×) %F{cyan}[%W]%f'
+        fi
+    fi
+}
+
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh     
