@@ -10,11 +10,29 @@ brew doctor
 cd ~/config
 
 mkdir -p ~/.ssh
-touch ~/.ssh/config
-cat ./sshconfig >> ~/.ssh/config
+FILE="~/.ssh/config"
+touch "$FILE"
+if [ -s "$FILE" ]; then
+    cat ./sshconfig >> "$FILE"
+else
+    rm "$FILE"
+    ln sshconfig "$FILE"
+fi
 
-touch ~/.zshrc
-cat ./zshrc:hard >> ~/.zshrc
+FILE="~/.zshrc"
+touch "$FILE"
+if [ -s "$FILE" ]; then
+    cat ./zshrc:hard >> "$FILE"
+else
+    rm "$FILE"
+    ln zshrc:hard "$FILE"
+fi
 
-touch ~/.gitconfig
-cat ./gitconfig:hard >> ~/.gitconfig
+FILE=" ~/.gitconfig"
+touch "$FILE"
+if [ -s "$FILE" ]; then
+    cat ./gitconfig:hard >> "$FILE"
+else
+    rm "$FILE"
+    ln gitconfig:hard "$FILE"
+fi
