@@ -1,0 +1,47 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# This won't be added again if you remove it.
+Include ~/.orbstack/ssh/config
+
+Host login.engin.umich.edu
+  HostName login.engin.umich.edu
+  User jbacarra
+
+Host caen login.engin.umich.edu 
+  HostName login.engin.umich.edu 
+  User jbacarra 
+  ControlPath ~/.ssh/%r@%h:%p 
+  ControlMaster auto 
+  ControlPersist yes
+
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+
+Host boat 192.168.0.69
+  HostName 192.168.0.69
+  User uma
+  ControlPath ~/.ssh/%r@%h:%p
+  ControlMaster auto
+  ControlPersist yes
+  ForwardAgent yes
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+
+Host peritia peritia.eecs.umich.edu
+  HostName peritia.eecs.umich.edu
+  User jbacarra
+  ControlPath ~/.ssh/%r@%h:%p
+  ControlMaster auto
+  ControlPersist 43200
+  IdentityFile ~/.ssh/id_ed25519
+
+Host 481 ec2-3-16-108-156.us-east-2.compute.amazonaws.com
+  HostName ec2-3-16-108-156.us-east-2.compute.amazonaws.com
+  User ubuntu
+  ControlPath ~/.ssh/%r@%h:%p
+  ControlMaster auto
+  ControlPersist 43200
+  IdentityFile ~/.ssh/eecs481.pem
