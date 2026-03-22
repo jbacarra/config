@@ -16,6 +16,7 @@ alias 445='cd ~/445eecs'
 alias 482='cd ~/482eecs'
 alias 201='cd ~/201eecs'
 alias UMA='cd ~/UMA/UMARepo'
+alias uma='cd ~/UMA/UMARepo'
 alias codem='source codem'
 
 alias gyat=git
@@ -27,7 +28,7 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH=$PATH:$HOME/UMA/UMARepo/scripts/devel_scripts
 export PATH="$PATH:/users/jackb/scripts"
 
-source ~/.cargo/env
+# source ~/.cargo/env
 
 # git tab complete
 autoload -Uz compinit && compinit
