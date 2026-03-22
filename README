@@ -1,1 +1,20 @@
 this has a bunch of config stuff for mac
+create a hard symlink: ln link_test /tmp/link_new
+
+
+run these commands:
+xcode-select --install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew doctor
+
+cd ~/config
+
+mkdir -p ~/.ssh
+touch ~/.ssh/config
+cat ./sshconfig >> ~/.ssh/config
+
+touch ~/.zshrc
+cat ./zshrc:hard >> ~/.zshrc
+
+touch ~/.gitconfig
+cat ./gitconfig:hard >> ~/.gitconfig
